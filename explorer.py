@@ -52,7 +52,8 @@ print("\nFirst 5 rows:\n", data.head())
 # ----------------------------------------------------------
 # .describe() gives key metrics like mean, std, min, max, quartiles for numeric columns
 print("\n📊 Summary Statistics:\n")
-print(data.drop(columns=["OrderID"]).describe())
+exclude_cols = ["OrderID"]
+print(data.drop(columns=exclude_cols).describe())
 
 # ----------------------------------------------------------
 # 🎨 Step 4 — Visualize numeric data distributions
