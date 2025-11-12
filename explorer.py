@@ -48,13 +48,26 @@ print("\nMissing Values:\n", data.isnull().sum())
 print("\nFirst 5 rows:\n", data.head())
 
 # ----------------------------------------------------------
-# 📈 Step 3 — Display summary statistics
+# 📈 Step 3 — Display summary statistics with Optional Exclusion
 # ----------------------------------------------------------
-# .describe() gives key metrics like mean, std, min, max, quartiles for numeric columns
-print("\n📊 Summary Statistics:\n")
-exclude_cols = ["OrderID"]
-print(data.drop(columns=exclude_cols).describe())
+print("\nAvailable columns:")
+print(list(data.columns))
 
+# asking user if they want to exclude any columns
+exclude_input = input(
+    "\nEnter column names to exclude (comma-separated), or press Enter to skip:"
+)
+# Convert user input into clean list
+exclude_cols = [
+    col.strip() for col in exclude_input.split(",") if col.strip()
+]  # removes spaces and blanks
+# if user entered something, then drop those columns before describing
+if exclude_cols:
+    print(f"\nExcluding columns: {exclude_cols}")
+    print(data.drop(columns=exclude_cols, errors="ignore").describe())
+else:
+    print("\nNo columns excluded.")
+    print(data.describe())
 # ----------------------------------------------------------
 # 🎨 Step 4 — Visualize numeric data distributions
 # ----------------------------------------------------------
