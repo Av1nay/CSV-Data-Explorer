@@ -28,7 +28,9 @@ def get_file_path():
 # ===========================================================
 # validating file extension
 def validate_file_extension(file_path):
-    _, extension = os.path.splitext(file_path)
+    _, extension = os.path.splitext(
+        file_path
+    )  # ignoe file name with "_" and capture extension of the file with extension
     extension = extension.lower()  # normalize the extensions
 
     valid_extensions = [".csv", ".xlsx", ".xls"]
@@ -36,7 +38,7 @@ def validate_file_extension(file_path):
     if extension not in valid_extensions:
         print(f"Unsuported file type {extension}")
         print(
-            f"Supported formats: {',' .join(extension)}"
+            f"Supported formats: {', ' .join(valid_extensions)}"
         )  # shows in comma (,) separated not in tuple
         return None
 
@@ -114,9 +116,15 @@ def load_data(
 
 # test
 if __name__ == "__main__":  # run this code only when executed directly
-    path = get_file_path()
-    if path:
+    while True:
+        path = get_file_path()
+        if not path:
+            continue
+
         extension = validate_file_extension(path)
+        if not extension:
+            continue
+
         if extension == ".csv":
             delimiter = detect_delimiter(path)
             encoding = detect_encoding(path)
@@ -124,5 +132,7 @@ if __name__ == "__main__":  # run this code only when executed directly
         else:
             df = load_data(path, extension)
 
-        print("Loaded Dataframe:")
-        print(df.head())  # print top 5 data with header of the column
+        if df is not None:
+            print("Loaded Dataframe:")
+            print(df.head())  # print top 5 data with header of the column
+            break
