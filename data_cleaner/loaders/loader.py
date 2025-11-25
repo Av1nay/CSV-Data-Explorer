@@ -7,13 +7,24 @@ import pandas as pd
 
 # ===========================================================
 def get_file_path():
+    # Get the directory of the current script (loaders/)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Go up one level to data_cleaner/ and then into data/
+    default_path = os.path.join(current_dir, "..", "data", "raw.csv")
+    # Normalize path to look nice
+    default_path = os.path.normpath(default_path)
+
     # ask user for file path and remove any leading/trailing whitespace
-    file_path = input("Enter the file path: ").strip()
+    file_path = input(
+        f"Enter the file path or press enter for default path {default_path} "
+    ).strip()
 
     # user must enter something
     if not file_path:
-        print("Error: File path cannot be empty")
-        return None
+        # print("Error: File path cannot be empty")
+        print(f"No path provided. So now used default sample file: \n {default_path} ")
+        file_path = default_path
+        # return None
 
     # check if file exists
     if not os.path.isfile(file_path):

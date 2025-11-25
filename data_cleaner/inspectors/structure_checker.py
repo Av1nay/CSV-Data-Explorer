@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def check_structure(df):
-    report = {}  # empty list for report, later append output result
+    report = {}  # empty dictionary for report, later append output result
 
     # ----------------
     # basic shape
