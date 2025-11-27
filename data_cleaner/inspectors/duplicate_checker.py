@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def detect_dupliates(df):
+def detect_duplicates(df):
     report = {}
 
     exact_duplicates = df[
