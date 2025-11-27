@@ -31,5 +31,5 @@ def detect_duplicates(df):
 # ----------------------
 # remove duplicates
 def remove_duplicates(df):
-    cleaned_df = df.drop_duplicate()
+    cleaned_df = df.drop_duplicates()
     return cleaned_df

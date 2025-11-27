@@ -39,6 +39,8 @@ def get_file_path():
 # ===========================================================
 # validating file extension
 def validate_file_extension(file_path):
+    if file_path is None:
+        return None
     _, extension = os.path.splitext(
         file_path
     )  # ignoe file name with "_" and capture extension of the file with extension
